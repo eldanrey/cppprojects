@@ -11,7 +11,11 @@
         "xutility": "cpp",
         "chrono": "cpp",
         "system_error": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "atomic": "cpp",
+        "forward_list": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

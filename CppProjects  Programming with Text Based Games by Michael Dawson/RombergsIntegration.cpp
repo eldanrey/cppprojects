@@ -8,6 +8,56 @@ double fxSolve(double x){
     if(tolower(fx[i])=='x');
   }
 }
+
+void getBounds(const string& prompt){
+  bool isPlus=false, isMinus=false, isMult=true, isDiv=false;
+  string input="";
+  double ans=1;
+  while(tolower(input)!="q"){
+     cout<<prompt;
+      cin>>input;
+      if(input=="+"){
+        isPlus=true;
+        isMinus=false; 
+        isMult=false; 
+        isDiv=false;
+      }
+      else if(input=="-"){
+        isPlus=false; 
+        isMinus=true; 
+        isMult=false; 
+        isDiv=false;
+      }
+      else if(input=="*"){
+        isPlus=false;
+        isMinus=false; 
+        isMult=true;
+        isDiv=false;
+      }
+      else if(input=="/"){
+        isPlus=false;
+        isMinus=false; 
+        isMult=false;
+        isDiv=true;
+      }
+      if(isPlus){
+        
+      }
+      else if(isMinus){
+        
+      }
+      else if(isMult){
+        
+      }
+      else if(isDiv){
+        
+      }
+  }
+ 
+
+
+
+}
 int main(){
     int segments;
     string upperBound,lowerBound;

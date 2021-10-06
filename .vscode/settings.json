@@ -15,7 +15,11 @@
         "atomic": "cpp",
         "forward_list": "cpp",
         "ios": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "iomanip": "cpp",
+        "cmath": "cpp",
+        "locale": "cpp",
+        "iosfwd": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

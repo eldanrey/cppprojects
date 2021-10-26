@@ -20,8 +20,12 @@ void content()
 
 
 int factorial(int value)
-{
-	if (value==1)return 1;
+{	
+	
+	
+	if (value==1)
+	{cout<<"1 = ";return 1;}
+	else if(value>1)cout<<value<<"*";
 	return value*factorial(value-1);
 }
 int main(){

@@ -21,25 +21,14 @@ std::ifstream readFile;
 std::ofstream writeFile;
 
 
-class Student {
-    
-    int Age;
-    string IdNumber;
-    string Name;
-    string Password;
-    int BirthDay, BirthMonth, BirthYear;
+class User {
+protected:
+    string IdNumber, Name, Password;
+    int BirthDay, BirthMonth, BirthYear, Age;
 
 public:
-    void status() {
+    virtual void status() {
         cout << "Name: " << Name << "\nAge: " << Age << "\nId Number: " << IdNumber << "\nBirthDate " << BirthMonth << "/" << BirthDay << "/" << BirthYear << std::endl;
-    }
-    Student(string name, string idnumber, int age, int birthmonth, int birthday, int birthyear) {
-        Name = name;
-        Age = age;
-        IdNumber = idnumber;
-        BirthDay = birthday;
-        BirthMonth = birthmonth;
-        BirthYear = birthyear;
     }
     string getIdNumber() {
         return IdNumber;
@@ -59,15 +48,82 @@ public:
             string bd = s.str();
         return bd;
     }
+    virtual void CreateAnAccount() {
+        writeFile.open("records.dat", std::ios::out);
+    }
 };
+class Student: public User {
+    int YearStanding;
+public:
+    string getYearStanding() {
+        std::stringstream ss;
+        ss << YearStanding;
+        string ystanding;
+        ss >> ystanding;
+        switch (YearStanding) {
+        case 1:  ystanding += "st Year Student"; break;
+        case 2:  ystanding += "nd Year Student"; break;
+        case 3:  ystanding += "rd Year Student"; break;
+        default:  ystanding += "th Year Student"; break;
+        }
+        return ystanding;
+    }
+    void status() {
+        cout << "Name: " << Name << "\nAge: " << Age << "\nId Number: " << IdNumber << "\nBirthDate " << BirthMonth << "/" << BirthDay << "/" << BirthYear<<"\nStanding: "<<YearStanding<<std::endl;
+    }
+    
+   
+    
+
+
+};
+void CreateAnAccount() {
+    string IdNumber, Name, Password;
+    int BirthDay, BirthMonth, BirthYear, Age, YearStanding;
+    writeFile.open("C:/Users/dand1/source/repos/eldanrey/cppprojects/LoginRegister/records.dat",std::ios::out |std::ios::app);
+    cout << "Name: ";
+    cin >> Name;
+    cout << "Password: ";
+    cin >> Password;
+    cout << "IdNumber: ";
+    cin >> IdNumber;
+    cout << "Age: ";
+    cin >> Age;
+    cout << "Birth Month: ";
+    cin >> BirthMonth;
+    cout << "Birth Day: ";
+    cin >> BirthDay;
+    cout << "Birth Year: ";
+    cin >> BirthYear;
+    cout << "Year Standing: ";
+    cin >> YearStanding;
+    
+    writeFile << IdNumber << " " << Password << " " << Name << " " << Age << " " << BirthMonth << " " << BirthDay << " " << BirthYear << " " << YearStanding << " *end\n";
+    writeFile.close();
+    cout << "DONE";
+}
+
 
 
 bool compareCredentials(string idnumber, string password) {
+    cout << "Here";
     readFile.open("records.dat", std::ios::in);
+    string dbidnumber, dbpassword;
     string ss;
     std::stringstream s;
-
+    bool flag = 0;
+    while (std::getline(readFile, ss) ) {
+        cout << ss;
+        s << ss;
+        s >> dbidnumber >> dbpassword;
+        if (dbidnumber == idnumber && dbpassword == password) {
+            flag = 1;
+        }
+    }
+    return (flag) ? 1 : 0;
+    readFile.close();
 }
+
 bool LoginSystem() {
     string idnumber, password;
     cout << "Id Number: ";
@@ -77,19 +133,24 @@ bool LoginSystem() {
     if (compareCredentials(idnumber,password))return 1;
     else return 0;
 }
+
 void Menu() {
     cout << "\t\tWelcome To My Simple Login Register Application\n\n";
+    cout << "[1] Create an Account: ";
+    int choice;
+    cin >> choice;
+    switch (choice) {
+        case 1:
+            CreateAnAccount();
+            break;
+    }
 
 }
 int main()
 {   
-    if (LoginSystem())Menu();
-    cout << "WHAT";
+    Menu();
     
-    Student student1 = Student("Eldan", "S512938", 21, 11, 30, 2000);
-    cout << student1.getBirthDate();
-    student1.status();
-    std::cout << "Hello World!\n";
+    
 
 }
 

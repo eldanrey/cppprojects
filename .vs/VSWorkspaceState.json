@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\cppSimpleLoginRegister"
+    "\\cppSimpleLoginRegister",
+    "\\LoginRegister"
   ],
-  "SelectedNode": "\\cppSimpleLoginRegister\\main.cpp",
+  "SelectedNode": "\\LoginRegister\\LoginRegister.cpp",
   "PreviewInSolutionExplorer": false
 }

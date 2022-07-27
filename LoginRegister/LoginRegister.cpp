@@ -170,15 +170,15 @@ bool compareCredentials(string idnumber, string password) {
     bool flag = 0;
     for (int i = 0; i < 8; i++) {
         std::getline(readFile, data[i]);
-            if (data[0] == idnumber && data[1] == password) {
-                flag = 1;
-                break;
-            }
     }
-    
+    if (data[0] == idnumber && data[1] == password) {
+        flag = 1;
+    }
+    for (auto x : data)cout << x << '\t';
     readFile.close();
+    
     if (flag) {
-        if (tolower(data[0].at(0)) == 's') {
+        if (data[0][1]=='s' || data[0][0] == 'S') {
             Student student;
             student.setName(data[2]);
             student.setAge(data[3]);
@@ -187,6 +187,7 @@ bool compareCredentials(string idnumber, string password) {
             student.setBirthMonth(data[4]);
             student.setBirthDay(data[5]);
             student.setYearStanding(data[7]);
+            
             system("pause");
             return 1;
         }
@@ -250,7 +251,8 @@ void Start() {
 
 }
 int main()
-{   
+{
+    Student student;
     Start();
 }
 

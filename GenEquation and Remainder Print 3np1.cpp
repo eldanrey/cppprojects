@@ -35,21 +35,45 @@ ll genEquation(ll natNum, int degree){
 
 
 int main(){
-    
-#ifndef ONLINE_JUDGE
-freopen("input.txt", "r", stdin);
-freopen("output.txt", "w", stdout);
-#endif
-rem remainder;
-ll predict = genEquation(198,7);
-cout<<"Predicted Number: "<<predict<<'\n';
-
-int degree = 4;
-ll range= pow(2,(degree-1));
-cout<<"d\tp\n";
-for(int i= 1;i<range;i+=2){
-    remainder = getRemainder(i,degree);
-    cout<<remainder.d<<"\t"<<remainder.p<<"\n";
+	 again:
+	system("cls");
+ rem remainder;   
+cout<<"[1] Predict using GenEquation\n[2]Print all Remainders (d and p)\nChoice: ";
+int choice;
+cin>>choice;
+system("cls");
+int degree=1;
+ll natNum=0,predict;
+switch(choice){
+	case 1: 	
+		cout<<"Enter Natural Number: ";
+		cin>>natNum;
+		cout<<"\nEnter Degree: ";
+		cin>>degree;
+		 predict = genEquation(natNum,degree);
+		cout<<"\nPredicted Number: "<<predict<<"\n\n\n";
+		break;
+	case 2:
+		cout<<"Enter Degree: ";
+		cin>>degree;
+		ll range= pow(2,(degree-1));
+		cout<<"d\tp\n";
+		for(int i= 1;i<range;i++){
+    		remainder = getRemainder(i,degree);
+    		cout<<remainder.d<<"\t"<<remainder.p<<"\n";
+			}
+			break;
 }
+system("pause");system("cls");
+cout<<"\n\n\nEXIT(Y/N)???";
+char ch;
+cin>>ch;
+if(ch == 'y' || ch =='Y')return 0;
+goto again;
+
+
+
+
+
    
 }

@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BigInt"
+    "\\BigInt",
+    "\\LoginRegister"
   ],
   "SelectedNode": "\\BigInt\\BigInt.cpp",
   "PreviewInSolutionExplorer": false

@@ -1,29 +1,56 @@
 #include <iostream>
-#pragma warning(4:4596)
+#include <cmath>
 
 
 class BigInt {
-public:
     std::string digits;
-    BigInt(const std::string &);
+public:
+    BigInt(const std::string& s) {
+        for (int i = s.size()-1; i >= 0; i--) {
+            if (isdigit(s[i])) {
+                digits.push_back(s[i]);
+            }
+        }
+    }
+     friend std::ostream& operator << (std::ostream& cout, BigInt s) {
+        for (int i = s.digits.size()-1; i >=0 ; i--) {
+            std::cout << s.digits[i];  
+        }
+        return cout;
+    }
 
-   friend std::ostream &operator <<(std::ostream& COUT,  BigInt &a) {
-        for (int i = a.digits.size() - 1; i >= 0; i--)
-           std::cout << (short)a.digits[i];
-        return COUT;
-    }
+      friend int Size(const BigInt& a) {
+         return a.digits.size();
+     }
+      int operator [](const size_t i) const{
+          if (digits.size() <= i || i < 0)throw("ERROR");
+          return digits[i];
+      }
+
+     friend BigInt& operator +=(BigInt &a, const BigInt& b) {
+         int carry = 0,sum=0;
+         int n = Size(a), m =Size(b);
+         if (m>n) a.digits.append(m-n, 0);
+         n = Size(a);
+             for (int i = 0; i < n; i++) {
+                 if (i < m)sum = (a.digits[i] + b.digits[i]) + carry;
+                 else sum = a.digits[i] + carry;
+                 carry=
+                 a.digits[i] = (sum % 10);
+             }
+             if (carry>0)a.digits.push_back(carry);
+             return a;
+     
+     }
+
 };
-BigInt::BigInt(const std::string& s="") {
-    digits = "";
-    int n = s.size();
-    for (int i = n - 1; i >= 0; i--) {
-        if (!isdigit(s[i]))
-            throw("ERROR");
-        digits.push_back(s[i] - '0');
-    }
-}
+
 int main()
 {
-    BigInt bi("313213213123123123123213213122312");
-    std::cout << bi;
+    BigInt bi("1234"), bi2("1234");
+    bi2 += bi;
+    std::cout << bi2;
+    std::cout << '\n';
+    std::cout << Size(bi);
+
 }

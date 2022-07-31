@@ -1,3 +1,3 @@
 ﻿  CollatzConjectureBits.cpp
-C:\Users\dand1\source\repos\eldanrey\cppprojects\CollatzConjectureBits\CollatzConjectureBits\CollatzConjectureBits.cpp(59,26): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\dand1\source\repos\eldanrey\cppprojects\CollatzConjectureBits\CollatzConjectureBits\CollatzConjectureBits.cpp(93,26): warning C4018: '<=': signed/unsigned mismatch
   CollatzConjectureBits.vcxproj -> C:\Users\dand1\source\repos\eldanrey\cppprojects\CollatzConjectureBits\x64\Debug\CollatzConjectureBits.exe

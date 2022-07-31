@@ -22,21 +22,54 @@
 */
 
 #include <iostream>
+#include <fstream>
+
+std::ofstream writefile;
 typedef long long ll;
 
 class Collatz {
     std::string BIT;
 public:
-    Collatz(const std::string& natNum) {
+    /*Collatz(const std::string& natNum) {
         BIT = "";
         ll n = natNum.size();
         for (ll i = n - 1; i >= 0; i--) {
             if (natNum[i] == '0' || natNum[i] == '1')BIT.push_back(natNum[i]);
                 
         } 
+    }*/
+    std::string getNthDegree(const std::string& natNum, int degree) {
+        /*
+            THIS FUNCTION TAKES THE NATURAL NUMBER IN BITS
+            AND THE NUBMER OF DEGREES
+            AND RETURN THE COLLATZ OPERATION (3N+1)
+            N DEGREES TIMES;
+        */
+        std::string originalBit = Reverse(natNum);
+        for (int i = 1; i <= degree; i++) {
+            originalBit=collatzOperation(originalBit);
+        }
+        return Reverse(originalBit);
     }
-    std::string getNthDegree(Collatz& natNum, int degree) {
+    ll getHighestDegree(const std::string natNum) {
+        ll count = 1;
+        writefile.open("what.txt", std::ios::out);
+        std::string originalBit = Reverse(natNum);
+        while (originalBit.size()!=1) {
+            originalBit = collatzOperation(originalBit);
+            writefile << Reverse(originalBit) << "\n";
+            count++;
+        }
+        return count;
+    }
 
+    std::string collatzOperation(const std::string& natNum) {
+        std::string originalBit = natNum;
+        if (originalBit[0] == '0') {
+            originalBit = evenOperation(originalBit);
+        }
+        else originalBit = oddOperation(originalBit);
+        return originalBit;
     }
  
 
@@ -115,13 +148,13 @@ public:
 
 
     
-    void Print() {
-        std::string answer = oddOperation(BIT);
-        ll n = answer.size();
+   std::string Reverse(const std::string& print){
+        ll n = print.size();
+        std::string answer = "";
         for (ll i = n - 1; i >= 0; i--) {
-            std::cout << answer[i];
+            answer.push_back(print[i]);
         }
-
+        return answer;
     }
 
 
@@ -131,8 +164,7 @@ public:
 int main()
 {
                                    
-    Collatz col("10100101001110"); 
-    col.Print();
-   
-    std::cout << "Hello World!\n";
+    Collatz col; 
+    ll answer = col.getHighestDegree("1000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001");
+    std::cout << answer;
 }

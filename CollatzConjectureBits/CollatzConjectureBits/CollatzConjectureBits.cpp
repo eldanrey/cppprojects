@@ -57,7 +57,7 @@ public:
         std::string originalBit = Reverse(natNum);
         while (originalBit.size()!=1) {
             originalBit = collatzOperation(originalBit);
-            writefile << Reverse(originalBit) << "\n";
+           /* writefile << Reverse(originalBit) << "\n";*/
             count++;
         }
         return count;
@@ -165,6 +165,11 @@ int main()
 {
                                    
     Collatz col; 
-    ll answer = col.getHighestDegree("1000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001");
+    std::string bit = "1";
+    for (int i = 1; i <= 1000000; i++) {
+        bit += '0';
+    }
+    bit += '1';
+    ll answer = col.getHighestDegree(bit);
     std::cout << answer;
 }

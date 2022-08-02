@@ -19,6 +19,7 @@ using std::cout;
 using std::cin;
 std::ifstream readFile;
 std::ofstream writeFile;
+void Start();
 
 
 class User {
@@ -94,11 +95,16 @@ class Student: public User {
     int YearStanding;
 public:
     string getYearStanding() {
+
+        string ystanding;
         std::stringstream ss;
         ss << YearStanding;
-        string ystanding;
         ss >> ystanding;
-        switch (YearStanding) {
+        int rem = YearStanding / (pow(10, ((int)log10(YearStanding))));
+        YearStanding = YearStanding - ((pow(10, ((int)log10(YearStanding)))) * rem);
+     
+
+        switch (YearStanding %4 ) {
         case 1:  ystanding += "st Year Student"; break;
         case 2:  ystanding += "nd Year Student"; break;
         case 3:  ystanding += "rd Year Student"; break;
@@ -115,14 +121,17 @@ public:
         YearStanding = intyear;
     }
     void status() {
-        cout << "Name: " << Name << "\nAge: " << Age << "\nId Number: " << IdNumber << "\nBirthDate " << BirthMonth << "/" << BirthDay << "/" << BirthYear<<"\nStanding: "<<YearStanding<<std::endl;
+        cout << "Name: " << Name << "\nAge: " << Age << "\nId Number: " << IdNumber << "\nBirthDate " << BirthMonth << "/" << BirthDay << "/" << BirthYear<<"\nStanding: "<<getYearStanding() << std::endl;
     }
     
    
     
-
+    
 
 };
+
+Student student;
+
 void CreateAnAccount() {
     string IdNumber, Name, Password;
     int BirthDay, BirthMonth, BirthYear, Age, YearStanding;
@@ -168,18 +177,22 @@ bool compareCredentials(string idnumber, string password) {
     */
     
     bool flag = 0;
-    for (int i = 0; i < 8; i++) {
-        std::getline(readFile, data[i]);
+    int i = 0;
+    while (std::getline(readFile, data[i])) {
+        if (data[0] == idnumber && data[1]== password) {
+            flag = 1;
+        }
+        i++;
+        if (i == 8) {
+            if (flag)break;
+            i = 0;
+        }
     }
-    if (data[0] == idnumber && data[1] == password) {
-        flag = 1;
-    }
-    for (auto x : data)cout << x << '\t';
     readFile.close();
     
     if (flag) {
         if (data[0][1]=='s' || data[0][0] == 'S') {
-            Student student;
+
             student.setName(data[2]);
             student.setAge(data[3]);
             student.setIdNumber(data[0]);
@@ -187,7 +200,6 @@ bool compareCredentials(string idnumber, string password) {
             student.setBirthMonth(data[4]);
             student.setBirthDay(data[5]);
             student.setYearStanding(data[7]);
-            
             system("pause");
             return 1;
         }
@@ -213,17 +225,18 @@ login:
     }
 }
 void Menu() {
+    again:
     system("cls");
-    Student student;
-    cout << student.getAge();
     cout << "\n[1] Check Status";
     cout << "\nYour Choice: ";
     int choice;
     cin >> choice;
     switch (choice) {
+    case -1: Start();
     case 1:
         student.status();
-        
+        system("pause");
+        goto again;
         break;
 
     }
@@ -231,7 +244,10 @@ void Menu() {
 
 
 }
+int exit() { return EXIT_SUCCESS; }
 void Start() {
+    
+again:
     system("cls");
     cout << "\n\n\t\tWelcome To My Simple Login Register Application\n\n";
     cout << "\n[1] Create an Account";
@@ -240,8 +256,11 @@ void Start() {
     int choice;
     cin >> choice;
     switch (choice) {
+    case -1: exit();
+        break;
         case 1:
             CreateAnAccount();
+            goto again;
             break;
         case 2:
             if(LoginSystem())Menu();
@@ -252,7 +271,6 @@ void Start() {
 }
 int main()
 {
-    Student student;
     Start();
 }
 

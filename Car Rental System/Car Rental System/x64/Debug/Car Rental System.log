@@ -1,0 +1,7 @@
+﻿  Car Rental System.cpp
+C:\Users\dand1\source\repos\eldanrey\cppprojects\Car Rental System\Car Rental System\Car Rental System.cpp(57,19): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=std::chrono::system_clock::rep
+          ]
+  Car Rental System.vcxproj -> C:\Users\dand1\source\repos\eldanrey\cppprojects\Car Rental System\x64\Debug\Car Rental System.exe

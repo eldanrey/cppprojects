@@ -1,4 +1,12 @@
 
 *.exe
 *.opendb
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+*..vsidx
+>>>>>>> d724437c2f88e3c2659e9595b1ccd6a974120a1c
+=======
+*..vsidx
+>>>>>>> d724437c2f88e3c2659e9595b1ccd6a974120a1c
 /dandy
